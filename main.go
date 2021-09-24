@@ -30,6 +30,10 @@ func main() {
 
 	server := atreugo.New(config.Server)
 
+	server.GET("/", func(ctx *atreugo.RequestCtx) error {
+		return ctx.HTTPResponse("sumbur")
+	})
+
 	err = server.ListenAndServe()
 	if err != nil {
 		panic(err)
