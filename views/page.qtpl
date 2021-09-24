@@ -1,0 +1,15 @@
+{% func Page() -%}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+</head>
+
+<body>
+sumbur
+</body>
+
+</html>
+{% endfunc %}

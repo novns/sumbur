@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"sumbur/views"
 
 	"github.com/savsgio/atreugo/v11"
 	"gopkg.in/yaml.v2"
@@ -30,13 +31,16 @@ func main() {
 		panic(err)
 	}
 
-	// Run
+	// Server & routes
 
 	server := atreugo.New(config.Server)
 
 	server.GET("/", func(ctx *atreugo.RequestCtx) error {
-		return ctx.HTTPResponse("sumbur")
+		views.WritePage(ctx)
+		return nil
 	})
+
+	// Run
 
 	err = server.ListenAndServe()
 	if err != nil {

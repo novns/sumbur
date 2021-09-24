@@ -4,6 +4,7 @@ go 1.17
 
 require (
 	github.com/savsgio/atreugo/v11 v11.8.3
+	github.com/valyala/quicktemplate v1.7.0
 	gopkg.in/yaml.v2 v2.4.0
 )
 
