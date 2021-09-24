@@ -1,0 +1,6 @@
+{% func (data *NotFound) Title() %}404 Not Found{% endfunc %}
+
+
+{% func (data *NotFound) Body() %}
+<p>The page "{%z data.path %}" has sunk into oblivion
+{% endfunc %}
