@@ -1,13 +1,36 @@
 package main
 
 import (
+	"os"
+
 	"github.com/savsgio/atreugo/v11"
+	"gopkg.in/yaml.v2"
 )
 
-func main() {
-	server := atreugo.New(atreugo.Config{Addr: "127.0.0.1:8000"})
+type Config struct {
+	Server atreugo.Config
+}
 
-	err := server.ListenAndServe()
+func main() {
+	// Configuration
+
+	config := Config{}
+
+	file, err := os.ReadFile(os.Getenv("SUMBUR_CONFIG"))
+	if err != nil {
+		panic(err)
+	}
+
+	err = yaml.Unmarshal(file, &config)
+	if err != nil {
+		panic(err)
+	}
+
+	// Run
+
+	server := atreugo.New(config.Server)
+
+	err = server.ListenAndServe()
 	if err != nil {
 		panic(err)
 	}
