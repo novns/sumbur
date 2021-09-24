@@ -24,7 +24,18 @@ type BasePage struct{}
 </head>
 
 <body>
-{%= page.Body() -%}
+
+<header>
+<h1>{%= page.Title() %}</h1>
+</header>
+
+<main>
+{%= page.Body() %}
+</main>
+
+<footer>
+</footer>
+
 </body>
 
 </html>
