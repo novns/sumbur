@@ -44,6 +44,10 @@ func main() {
 		return nil
 	})
 
+	server.GET("/panic", func(ctx *atreugo.RequestCtx) error {
+		panic("A drum, a drum! Panic doth come.")
+	})
+
 	// Run
 
 	err = server.ListenAndServe()
