@@ -14,32 +14,81 @@ var (
 	_ = qt422016.AcquireByteBuffer
 )
 
-func StreamPage(qw422016 *qt422016.Writer) {
+type HTML interface {
+	Title() string
+	StreamTitle(qw422016 *qt422016.Writer)
+	WriteTitle(qq422016 qtio422016.Writer)
+	Body() string
+	StreamBody(qw422016 *qt422016.Writer)
+	WriteBody(qq422016 qtio422016.Writer)
+}
+
+type BasePage struct{}
+
+func (page *BasePage) StreamTitle(qw422016 *qt422016.Writer) {
+}
+
+func (page *BasePage) WriteTitle(qq422016 qtio422016.Writer) {
+	qw422016 := qt422016.AcquireWriter(qq422016)
+	page.StreamTitle(qw422016)
+	qt422016.ReleaseWriter(qw422016)
+}
+
+func (page *BasePage) Title() string {
+	qb422016 := qt422016.AcquireByteBuffer()
+	page.WriteTitle(qb422016)
+	qs422016 := string(qb422016.B)
+	qt422016.ReleaseByteBuffer(qb422016)
+	return qs422016
+}
+
+func (page *BasePage) StreamBody(qw422016 *qt422016.Writer) {
+}
+
+func (page *BasePage) WriteBody(qq422016 qtio422016.Writer) {
+	qw422016 := qt422016.AcquireWriter(qq422016)
+	page.StreamBody(qw422016)
+	qt422016.ReleaseWriter(qw422016)
+}
+
+func (page *BasePage) Body() string {
+	qb422016 := qt422016.AcquireByteBuffer()
+	page.WriteBody(qb422016)
+	qs422016 := string(qb422016.B)
+	qt422016.ReleaseByteBuffer(qb422016)
+	return qs422016
+}
+
+func StreamPage(qw422016 *qt422016.Writer, page HTML) {
 	qw422016.N().S(`<!DOCTYPE html>
 
 <html lang="en">
 
 <head>
 <meta charset="UTF-8">
+<title>`)
+	page.StreamTitle(qw422016)
+	qw422016.N().S(`</title>
 </head>
 
 <body>
-sumbur
-</body>
+`)
+	page.StreamBody(qw422016)
+	qw422016.N().S(`</body>
 
 </html>
 `)
 }
 
-func WritePage(qq422016 qtio422016.Writer) {
+func WritePage(qq422016 qtio422016.Writer, page HTML) {
 	qw422016 := qt422016.AcquireWriter(qq422016)
-	StreamPage(qw422016)
+	StreamPage(qw422016, page)
 	qt422016.ReleaseWriter(qw422016)
 }
 
-func Page() string {
+func Page(page HTML) string {
 	qb422016 := qt422016.AcquireByteBuffer()
-	WritePage(qb422016)
+	WritePage(qb422016, page)
 	qs422016 := string(qb422016.B)
 	qt422016.ReleaseByteBuffer(qb422016)
 	return qs422016

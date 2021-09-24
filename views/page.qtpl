@@ -1,14 +1,30 @@
-{% func Page() -%}
+{% interface HTML {
+    Title()
+    Body()
+} %}
+
+
+{% code
+type BasePage struct{}
+%}
+
+{% func (page *BasePage) Title() %}{% endfunc %}
+
+{% func (page *BasePage) Body() %}{% endfunc %}
+
+
+{% func Page(page HTML) -%}
 <!DOCTYPE html>
 
 <html lang="en">
 
 <head>
 <meta charset="UTF-8">
+<title>{%= page.Title() %}</title>
 </head>
 
 <body>
-sumbur
+{%= page.Body() -%}
 </body>
 
 </html>

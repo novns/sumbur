@@ -36,7 +36,7 @@ func main() {
 	server := atreugo.New(config.Server)
 
 	server.GET("/", func(ctx *atreugo.RequestCtx) error {
-		views.WritePage(ctx)
+		views.WritePage(ctx, &views.BasePage{})
 		return nil
 	})
 
