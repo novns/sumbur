@@ -14,7 +14,11 @@ type Config struct {
 func main() {
 	// Configuration
 
-	config := Config{}
+	config := Config{
+		Server: atreugo.Config{
+			NoDefaultContentType: true,
+		},
+	}
 
 	file, err := os.ReadFile(os.Getenv("SUMBUR_CONFIG"))
 	if err != nil {
