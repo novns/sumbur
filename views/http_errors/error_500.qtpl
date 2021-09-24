@@ -1,0 +1,12 @@
+{% func (data *Panic) Title() %}500 Internal Server Error{% endfunc %}
+
+
+{% func (data *Panic) Body() %}
+<p>Errors are coming!
+
+<pre>
+{%v data.err %}
+
+{%z data.stack %}
+</pre>
+{% endfunc %}

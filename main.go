@@ -21,6 +21,7 @@ func main() {
 			NoDefaultContentType: true,
 
 			NotFoundView: http_errors.GetNotFound,
+			PanicView:    http_errors.GetPanic,
 		},
 	}
 
