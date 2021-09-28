@@ -39,6 +39,15 @@ type BasePage struct{}
 
 <div class="navbar-brand">Sumbur demo</div>
 
+<form id="auth-form" action="/auth" method="post" class="d-flex">
+{% if au.State() -%}
+<input type="submit" value="Logout" class="btn btn-outline-danger">
+{% else -%}
+<input type="password" name="password" size="12" placeholder="Password" class="form-control me-2">
+<input type="submit" value="Login" class="btn btn-outline-primary">
+{% endif -%}
+</form>
+
 </header>
 
 
