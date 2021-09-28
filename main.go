@@ -35,13 +35,13 @@ func main() {
 
 	// Server
 
-	server := atreugo.New(config.Server)
-
 	au := &auth.Auth{}
 
 	config.Server.MethodNotAllowedView = http_errors.NotFoundView(au)
 	config.Server.NotFoundView = http_errors.NotFoundView(au)
 	config.Server.PanicView = http_errors.PanicView(au)
+
+	server := atreugo.New(config.Server)
 
 	// Routes
 
