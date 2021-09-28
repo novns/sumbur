@@ -4,3 +4,5 @@ server:
 
 auth:
     cookie: SUMBUR_AUTH
+    password: password
+    ttl: 24

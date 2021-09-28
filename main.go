@@ -53,6 +53,8 @@ func main() {
 		return nil
 	})
 
+	server.POST("/auth", auth.LoginView(au))
+
 	server.GET("/panic", func(ctx *atreugo.RequestCtx) error {
 		panic("A drum, a drum! Panic doth come.")
 	})
