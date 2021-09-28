@@ -44,6 +44,8 @@ func main() {
 
 	server := atreugo.New(config.Server)
 
+	server.UseBefore(au.Check())
+
 	// Routes
 
 	server.GET("/", func(ctx *atreugo.RequestCtx) error {
