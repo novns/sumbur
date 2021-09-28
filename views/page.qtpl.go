@@ -59,7 +59,7 @@ func (page *BasePage) Body() string {
 	return qs422016
 }
 
-func StreamPage(qw422016 *qt422016.Writer, page HTML) {
+func StreamPage(qw422016 *qt422016.Writer, page HTML, au IAuth) {
 	qw422016.N().S(`<!DOCTYPE html>
 
 <html lang="en">
@@ -112,15 +112,15 @@ func StreamPage(qw422016 *qt422016.Writer, page HTML) {
 `)
 }
 
-func WritePage(qq422016 qtio422016.Writer, page HTML) {
+func WritePage(qq422016 qtio422016.Writer, page HTML, au IAuth) {
 	qw422016 := qt422016.AcquireWriter(qq422016)
-	StreamPage(qw422016, page)
+	StreamPage(qw422016, page, au)
 	qt422016.ReleaseWriter(qw422016)
 }
 
-func Page(page HTML) string {
+func Page(page HTML, au IAuth) string {
 	qb422016 := qt422016.AcquireByteBuffer()
-	WritePage(qb422016, page)
+	WritePage(qb422016, page, au)
 	qs422016 := string(qb422016.B)
 	qt422016.ReleaseByteBuffer(qb422016)
 	return qs422016

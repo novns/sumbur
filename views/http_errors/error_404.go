@@ -12,9 +12,11 @@ type NotFound struct {
 	path []byte
 }
 
-func GetNotFound(ctx *atreugo.RequestCtx) error {
-	ctx.SetStatusCode(404)
-	views.WritePage(ctx, &NotFound{path: ctx.Path()})
+func NotFoundView(auth views.IAuth) atreugo.View {
+	return func(ctx *atreugo.RequestCtx) error {
+		ctx.SetStatusCode(404)
+		views.WritePage(ctx, &NotFound{path: ctx.Path()}, auth)
 
-	return nil
+		return nil
+	}
 }

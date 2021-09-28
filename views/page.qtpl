@@ -13,7 +13,7 @@ type BasePage struct{}
 {% func (page *BasePage) Body() %}{% endfunc %}
 
 
-{% func Page(page HTML) -%}
+{% func Page(page HTML, au IAuth) -%}
 <!DOCTYPE html>
 
 <html lang="en">

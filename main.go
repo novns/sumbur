@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 	"sumbur/views"
+	"sumbur/views/auth"
 	"sumbur/views/http_errors"
 
 	"github.com/savsgio/atreugo/v11"
@@ -19,9 +20,6 @@ func main() {
 	config := Config{
 		Server: atreugo.Config{
 			NoDefaultContentType: true,
-
-			NotFoundView: http_errors.GetNotFound,
-			PanicView:    http_errors.GetPanic,
 		},
 	}
 
@@ -35,12 +33,20 @@ func main() {
 		panic(err)
 	}
 
-	// Server & routes
+	// Server
 
 	server := atreugo.New(config.Server)
 
+	au := &auth.Auth{}
+
+	config.Server.MethodNotAllowedView = http_errors.NotFoundView(au)
+	config.Server.NotFoundView = http_errors.NotFoundView(au)
+	config.Server.PanicView = http_errors.PanicView(au)
+
+	// Routes
+
 	server.GET("/", func(ctx *atreugo.RequestCtx) error {
-		views.WritePage(ctx, &views.BasePage{})
+		views.WritePage(ctx, &views.BasePage{}, au)
 		return nil
 	})
 

@@ -14,9 +14,11 @@ type Panic struct {
 	stack []byte
 }
 
-func GetPanic(ctx *atreugo.RequestCtx, err interface{}) {
-	ctx.Logger().Printf("%s", err)
+func PanicView(auth views.IAuth) atreugo.PanicView {
+	return func(ctx *atreugo.RequestCtx, err interface{}) {
+		ctx.Logger().Printf("%s", err)
 
-	ctx.SetStatusCode(500)
-	views.WritePage(ctx, &Panic{err: err, stack: debug.Stack()})
+		ctx.SetStatusCode(500)
+		views.WritePage(ctx, &Panic{err: err, stack: debug.Stack()}, auth)
+	}
 }
