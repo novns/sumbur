@@ -11,6 +11,7 @@ import (
 )
 
 type Config struct {
+	Auth   auth.Config
 	Server atreugo.Config
 }
 
@@ -35,7 +36,7 @@ func main() {
 
 	// Server
 
-	au := &auth.Auth{}
+	au := auth.Init(&config.Auth)
 
 	config.Server.MethodNotAllowedView = http_errors.NotFoundView(au)
 	config.Server.NotFoundView = http_errors.NotFoundView(au)
