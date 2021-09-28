@@ -64,31 +64,49 @@ func StreamPage(qw422016 *qt422016.Writer, page HTML) {
 
 <html lang="en">
 
+
 <head>
+
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>`)
 	page.StreamTitle(qw422016)
 	qw422016.N().S(`</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+    rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
 </head>
+
 
 <body>
 
-<header>
+
+<header class="container container-fluid navbar navbar-light bg-light">
+
+<div class="navbar-brand">Sumbur demo</div>
+
+</header>
+
+
+<main class="container">
+
 <h1>`)
 	page.StreamTitle(qw422016)
 	qw422016.N().S(`</h1>
-</header>
-
-<main>
 `)
 	page.StreamBody(qw422016)
 	qw422016.N().S(`
 </main>
 
-<footer>
+
+<footer class="container">
 </footer>
 
+
 </body>
+
 
 </html>
 `)
