@@ -55,6 +55,9 @@ func main() {
 
 	server.POST("/auth", auth.LoginView(au))
 
+	server.GET("/restrict", auth.RestrictedView(au)).
+		UseBefore(au.Restrict())
+
 	server.GET("/panic", func(ctx *atreugo.RequestCtx) error {
 		panic("A drum, a drum! Panic doth come.")
 	})

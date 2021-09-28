@@ -99,3 +99,33 @@ func LoginView(auth *Auth) atreugo.View {
 		return ctx.RedirectResponse(string(ctx.Referer()), 302)
 	}
 }
+
+// Restriction
+
+type Forbidden struct {
+	*views.BasePage
+}
+
+func (auth *Auth) Restrict() atreugo.Middleware {
+	return func(ctx *atreugo.RequestCtx) error {
+		if auth.state {
+			return ctx.Next()
+		}
+
+		ctx.SetStatusCode(403)
+		views.WritePage(ctx, &Forbidden{}, auth)
+
+		return nil
+	}
+}
+
+type Restricted struct {
+	*views.BasePage
+}
+
+func RestrictedView(auth *Auth) atreugo.View {
+	return func(ctx *atreugo.RequestCtx) error {
+		views.WritePage(ctx, &Restricted{}, auth)
+		return nil
+	}
+}

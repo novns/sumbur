@@ -1,0 +1,14 @@
+{% func (data *Forbidden) Title() %}403 Forbidden{% endfunc %}
+
+
+{% func (data *Forbidden) Body() %}
+<p>Nothing to see here. Move along...
+{% endfunc %}
+
+
+{% func (data *Restricted) Title() %}Welcome!{% endfunc %}
+
+
+{% func (data *Restricted) Body() %}
+<p>A wonderful restricted page
+{% endfunc %}
