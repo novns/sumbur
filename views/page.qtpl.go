@@ -83,18 +83,18 @@ func StreamPage(qw422016 *qt422016.Writer, page HTML, au IAuth) {
 <body>
 
 
-<header class="container container-fluid navbar navbar-light bg-light">
+<header class="container container-fluid navbar navbar-dark bg-secondary mb-3 py-1">
 
 <div class="navbar-brand">Sumbur demo</div>
 
 <form id="auth-form" action="/auth" method="post" class="d-flex">
 `)
 	if au.State() {
-		qw422016.N().S(`<input type="submit" value="Logout" class="btn btn-outline-danger">
+		qw422016.N().S(`<input type="submit" value="Logout" class="btn btn-danger">
 `)
 	} else {
 		qw422016.N().S(`<input type="password" name="password" size="12" placeholder="Password" class="form-control me-2">
-<input type="submit" value="Login" class="btn btn-outline-primary">
+<input type="submit" value="Login" class="btn btn-primary">
 `)
 	}
 	qw422016.N().S(`</form>
