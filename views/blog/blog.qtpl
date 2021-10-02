@@ -1,0 +1,5 @@
+{% func (blog *Blog) Title() %}Articles{% endfunc %}
+
+
+{% func (blog *Blog) Body() %}
+{% endfunc %}

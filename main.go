@@ -3,8 +3,8 @@ package main
 import (
 	"os"
 	"sumbur/db"
-	"sumbur/views"
 	"sumbur/views/auth"
+	"sumbur/views/blog"
 	"sumbur/views/http_errors"
 
 	"github.com/savsgio/atreugo/v11"
@@ -52,10 +52,8 @@ func main() {
 
 	// Routes
 
-	server.GET("/", func(ctx *atreugo.RequestCtx) error {
-		views.WritePage(ctx, &views.BasePage{}, au)
-		return nil
-	})
+	server.GET("/", blog.BlogView(au))
+	server.GET("/tag/{tag}", blog.BlogView(au))
 
 	server.POST("/auth", auth.LoginView(au))
 
