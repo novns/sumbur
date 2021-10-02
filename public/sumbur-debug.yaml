@@ -6,3 +6,5 @@ auth:
     cookie: SUMBUR_AUTH
     password: password
     ttl: 24
+
+db: dbname=sumbur

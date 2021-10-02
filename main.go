@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"sumbur/db"
 	"sumbur/views"
 	"sumbur/views/auth"
 	"sumbur/views/http_errors"
@@ -12,6 +13,7 @@ import (
 
 type Config struct {
 	Auth   auth.Config
+	DB     string
 	Server atreugo.Config
 }
 
@@ -41,6 +43,8 @@ func main() {
 	config.Server.MethodNotAllowedView = http_errors.NotFoundView(au)
 	config.Server.NotFoundView = http_errors.NotFoundView(au)
 	config.Server.PanicView = http_errors.PanicView(au)
+
+	db.DSN = &config.DB
 
 	server := atreugo.New(config.Server)
 
