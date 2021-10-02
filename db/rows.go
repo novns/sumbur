@@ -48,6 +48,16 @@ func (rows *Rows) Next() bool {
 	return true
 }
 
+func (rows *Rows) Get() bool {
+	if !rows.Next() {
+		return false
+	}
+
+	rows.Close()
+
+	return true
+}
+
 func (rows *Rows) Close() {
 	if rows.rows != nil {
 		rows.rows.Close()
