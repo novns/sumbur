@@ -6,12 +6,14 @@ import (
 	"github.com/savsgio/atreugo/v11"
 )
 
-func PathStringValue(ctx *atreugo.RequestCtx, key string) string {
+var EmptyString = ""
+
+func PathValue(ctx *atreugo.RequestCtx, key string) *string {
 	value := ctx.UserValue(key)
 	if value == nil {
-		return ""
+		return &EmptyString
 	}
 
 	result, _ := url.PathUnescape(value.(string))
-	return result
+	return &result
 }

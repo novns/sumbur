@@ -56,7 +56,7 @@ func QueryArticles(db *db.DB, auth views.IAuth, stag *string) *Articles {
 		article: Article{stag: stag},
 	}
 
-	if *stag == "" {
+	if stag == &views.EmptyString {
 		articles.query = db.Query(&SQL_ARTICLES, auth.State())
 	} else {
 		articles.query = db.Query(&SQL_ARTICLES_TAG, auth.State(), stag)
