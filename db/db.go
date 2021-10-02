@@ -15,9 +15,7 @@ type DB struct {
 	conn *pgxpool.Pool
 }
 
-func Open() *DB {
-	ctx := context.Background()
-
+func Open(ctx context.Context) *DB {
 	conn, err := pgxpool.Connect(ctx, *DSN)
 	if err != nil {
 		panic(err)

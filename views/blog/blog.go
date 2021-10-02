@@ -29,7 +29,7 @@ type Blog struct {
 
 func BlogView(auth views.IAuth) atreugo.View {
 	return func(ctx *atreugo.RequestCtx) error {
-		db := db.Open()
+		db := db.Open(ctx)
 		defer db.Close()
 
 		stag := views.PathValue(ctx, "tag")
