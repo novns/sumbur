@@ -1,0 +1,15 @@
+{% import "time" %}
+
+
+{% stripspace %}
+
+{% func Date(date time.Time) %}
+{%d date.Day() %}
+.
+{% if date.Month() < 10 %}0{% endif %}
+{%d int(date.Month()) %}
+.
+{%d date.Year() %}
+{% endfunc %}
+
+{% endstripspace %}
