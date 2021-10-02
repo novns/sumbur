@@ -33,8 +33,8 @@ func (rows *Rows) Next() bool {
 	}
 
 	if !rows.rows.Next() {
-		rows.rows.Close()
-		rows.rows = nil
+		rows.Close()
+
 		return false
 	}
 
@@ -44,4 +44,14 @@ func (rows *Rows) Next() bool {
 	}
 
 	return true
+}
+
+func (rows *Rows) Close() {
+	if rows.rows != nil {
+		rows.rows.Close()
+	}
+
+	rows.rows = nil
+	rows.args = nil
+	rows.dest = nil
 }
