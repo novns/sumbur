@@ -18,6 +18,9 @@ type HTML interface {
 	Title() string
 	StreamTitle(qw422016 *qt422016.Writer)
 	WriteTitle(qq422016 qtio422016.Writer)
+	TitleAdd() string
+	StreamTitleAdd(qw422016 *qt422016.Writer)
+	WriteTitleAdd(qq422016 qtio422016.Writer)
 	Body() string
 	StreamBody(qw422016 *qt422016.Writer)
 	WriteBody(qq422016 qtio422016.Writer)
@@ -37,6 +40,23 @@ func (page *BasePage) WriteTitle(qq422016 qtio422016.Writer) {
 func (page *BasePage) Title() string {
 	qb422016 := qt422016.AcquireByteBuffer()
 	page.WriteTitle(qb422016)
+	qs422016 := string(qb422016.B)
+	qt422016.ReleaseByteBuffer(qb422016)
+	return qs422016
+}
+
+func (page *BasePage) StreamTitleAdd(qw422016 *qt422016.Writer) {
+}
+
+func (page *BasePage) WriteTitleAdd(qq422016 qtio422016.Writer) {
+	qw422016 := qt422016.AcquireWriter(qq422016)
+	page.StreamTitleAdd(qw422016)
+	qt422016.ReleaseWriter(qw422016)
+}
+
+func (page *BasePage) TitleAdd() string {
+	qb422016 := qt422016.AcquireByteBuffer()
+	page.WriteTitleAdd(qb422016)
 	qs422016 := string(qb422016.B)
 	qt422016.ReleaseByteBuffer(qb422016)
 	return qs422016
@@ -72,6 +92,7 @@ func StreamPage(qw422016 *qt422016.Writer, page HTML, au IAuth) {
 
 <title>`)
 	page.StreamTitle(qw422016)
+	page.StreamTitleAdd(qw422016)
 	qw422016.N().S(`</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
@@ -104,9 +125,10 @@ func StreamPage(qw422016 *qt422016.Writer, page HTML, au IAuth) {
 
 <main class="container">
 
-<h1>`)
+<h2>`)
 	page.StreamTitle(qw422016)
-	qw422016.N().S(`</h1>
+	page.StreamTitleAdd(qw422016)
+	qw422016.N().S(`</h2>
 `)
 	page.StreamBody(qw422016)
 	qw422016.N().S(`

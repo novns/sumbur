@@ -1,5 +1,6 @@
 {% interface HTML {
     Title()
+    TitleAdd()
     Body()
 } %}
 
@@ -9,6 +10,8 @@ type BasePage struct{}
 %}
 
 {% func (page *BasePage) Title() %}{% endfunc %}
+
+{% func (page *BasePage) TitleAdd() %}{% endfunc %}
 
 {% func (page *BasePage) Body() %}{% endfunc %}
 
@@ -24,7 +27,7 @@ type BasePage struct{}
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>{%= page.Title() %}</title>
+<title>{%= page.Title() %}{%= page.TitleAdd() %}</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
     rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -53,7 +56,7 @@ type BasePage struct{}
 
 <main class="container">
 
-<h1>{%= page.Title() %}</h1>
+<h2>{%= page.Title() %}{%= page.TitleAdd() %}</h2>
 {%= page.Body() -%}
 
 </main>
