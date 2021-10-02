@@ -3,6 +3,7 @@ module sumbur
 go 1.17
 
 require (
+	github.com/MakeNowJust/heredoc v1.0.0
 	github.com/go-redis/redis/v8 v8.11.3
 	github.com/jackc/pgx/v4 v4.13.0
 	github.com/savsgio/atreugo/v11 v11.8.3
