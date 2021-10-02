@@ -25,13 +25,16 @@ ORDER BY
 type Tags struct {
 	query *db.Rows
 
+	stag *string
+
 	tag   []byte
 	count int
 }
 
-func QueryTags(db *db.DB, auth views.IAuth) *Tags {
+func QueryTags(db *db.DB, auth views.IAuth, stag *string) *Tags {
 	tags := Tags{
 		query: db.Query(&SQL_TAGS, auth.State()),
+		stag:  stag,
 	}
 
 	tags.query.Fields(

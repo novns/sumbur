@@ -18,13 +18,21 @@ func (tags *Tags) StreamTags(qw422016 *qt422016.Writer) {
 	qw422016.N().S(`<div class=fs-5>
 `)
 	for tags.Next() {
-		qw422016.N().S(`<a href="/tag/`)
-		qw422016.E().Z(tags.tag)
-		qw422016.N().S(`" class="me-2"><span class="badge bg-secondary">`)
-		qw422016.E().Z(tags.tag)
-		qw422016.N().S(`<span class="small ms-2">`)
-		qw422016.N().D(tags.count)
-		qw422016.N().S(`</span></span></a>`)
+		if string(tags.tag) == *tags.stag {
+			qw422016.N().S(`<a href="/" class="me-2"><span class="badge bg-primary">`)
+			qw422016.E().Z(tags.tag)
+			qw422016.N().S(`<span class="small ms-2">`)
+			qw422016.N().D(tags.count)
+			qw422016.N().S(`</span></span></a>`)
+		} else {
+			qw422016.N().S(`<a href="/tag/`)
+			qw422016.E().Z(tags.tag)
+			qw422016.N().S(`" class="me-2"><span class="badge bg-secondary">`)
+			qw422016.E().Z(tags.tag)
+			qw422016.N().S(`<span class="small ms-2">`)
+			qw422016.N().D(tags.count)
+			qw422016.N().S(`</span></span></a>`)
+		}
 		qw422016.N().S(`
 `)
 	}

@@ -18,8 +18,10 @@ func BlogView(auth views.IAuth) atreugo.View {
 		db := db.Open()
 		defer db.Close()
 
+		tag := views.PathStringValue(ctx, "tag")
+
 		data := Blog{
-			tags: QueryTags(db, auth),
+			tags: QueryTags(db, auth, &tag),
 		}
 
 		views.WritePage(ctx, &data, auth)
