@@ -66,10 +66,10 @@ VALUES
 
 INSERT INTO "tag" ("article_id", "tag")
 VALUES
-    (1,	'Tag 1'),
-    (1,	'Tag 2'),
-    (2,	'Tag 2'),
-    (2,	'Tag 3'),
-    (3,	'Tag 3'),
-    (3,	'Tag 4')
+    (1, 'Tag 1'),
+    (1, 'Tag 2'),
+    (2, 'Tag 2'),
+    (2, 'Tag 3'),
+    (3, 'Tag 3'),
+    (3, 'Tag 4')
 ;
