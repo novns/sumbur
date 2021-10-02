@@ -21,6 +21,8 @@ LIMIT 1
 type Blog struct {
 	*views.BasePage
 
+	stag *string
+
 	tags     *Tags
 	articles *Articles
 }
@@ -37,6 +39,8 @@ func BlogView(auth views.IAuth) atreugo.View {
 		}
 
 		data := Blog{
+			stag: stag,
+
 			tags:     QueryTags(db, auth, stag),
 			articles: QueryArticles(db, auth, stag),
 		}

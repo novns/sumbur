@@ -1,4 +1,20 @@
+{% import (
+    "sumbur/views"
+) %}
+
+
 {% func (blog *Blog) Title() %}Articles{% endfunc %}
+
+
+{% stripspace %}
+{% func (blog *Blog) TitleAdd() %}
+
+{% if blog.stag != &views.EmptyString %}
+{% space %}–{% space %}{%s *blog.stag %}
+{% endif %}
+
+{% endfunc %}
+{% endstripspace %}
 
 
 {% func (blog *Blog) Body() %}

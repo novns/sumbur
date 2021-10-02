@@ -4,6 +4,10 @@
 package blog
 
 import (
+	"sumbur/views"
+)
+
+import (
 	qtio422016 "io"
 
 	qt422016 "github.com/valyala/quicktemplate"
@@ -27,6 +31,29 @@ func (blog *Blog) WriteTitle(qq422016 qtio422016.Writer) {
 func (blog *Blog) Title() string {
 	qb422016 := qt422016.AcquireByteBuffer()
 	blog.WriteTitle(qb422016)
+	qs422016 := string(qb422016.B)
+	qt422016.ReleaseByteBuffer(qb422016)
+	return qs422016
+}
+
+func (blog *Blog) StreamTitleAdd(qw422016 *qt422016.Writer) {
+	if blog.stag != &views.EmptyString {
+		qw422016.N().S(` `)
+		qw422016.N().S(`–`)
+		qw422016.N().S(` `)
+		qw422016.E().S(*blog.stag)
+	}
+}
+
+func (blog *Blog) WriteTitleAdd(qq422016 qtio422016.Writer) {
+	qw422016 := qt422016.AcquireWriter(qq422016)
+	blog.StreamTitleAdd(qw422016)
+	qt422016.ReleaseWriter(qw422016)
+}
+
+func (blog *Blog) TitleAdd() string {
+	qb422016 := qt422016.AcquireByteBuffer()
+	blog.WriteTitleAdd(qb422016)
 	qs422016 := string(qb422016.B)
 	qt422016.ReleaseByteBuffer(qb422016)
 	return qs422016
