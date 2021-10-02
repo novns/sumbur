@@ -38,9 +38,11 @@ func (rows *Rows) Next() bool {
 		return false
 	}
 
-	err = rows.rows.Scan(*rows.dest...)
-	if err != nil {
-		panic(err)
+	if rows.dest != nil {
+		err = rows.rows.Scan(*rows.dest...)
+		if err != nil {
+			panic(err)
+		}
 	}
 
 	return true
