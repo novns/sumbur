@@ -3,4 +3,5 @@
 
 {% func (blog *Blog) Body() %}
 {%= blog.tags.Tags() %}
+{%= blog.articles.Articles() -%}
 {% endfunc %}

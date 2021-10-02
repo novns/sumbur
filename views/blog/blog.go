@@ -10,7 +10,8 @@ import (
 type Blog struct {
 	*views.BasePage
 
-	tags *Tags
+	tags     *Tags
+	articles *Articles
 }
 
 func BlogView(auth views.IAuth) atreugo.View {
@@ -21,7 +22,8 @@ func BlogView(auth views.IAuth) atreugo.View {
 		tag := views.PathStringValue(ctx, "tag")
 
 		data := Blog{
-			tags: QueryTags(db, auth, &tag),
+			tags:     QueryTags(db, auth, &tag),
+			articles: QueryArticles(db, auth, &tag),
 		}
 
 		views.WritePage(ctx, &data, auth)
