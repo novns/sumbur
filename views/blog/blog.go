@@ -9,6 +9,8 @@ import (
 
 type Blog struct {
 	*views.BasePage
+
+	tags *Tags
 }
 
 func BlogView(auth views.IAuth) atreugo.View {
@@ -16,7 +18,9 @@ func BlogView(auth views.IAuth) atreugo.View {
 		db := db.Open()
 		defer db.Close()
 
-		data := Blog{}
+		data := Blog{
+			tags: QueryTags(db, auth),
+		}
 
 		views.WritePage(ctx, &data, auth)
 

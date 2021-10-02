@@ -35,6 +35,9 @@ func (blog *Blog) Title() string {
 func (blog *Blog) StreamBody(qw422016 *qt422016.Writer) {
 	qw422016.N().S(`
 `)
+	blog.tags.StreamTags(qw422016)
+	qw422016.N().S(`
+`)
 }
 
 func (blog *Blog) WriteBody(qq422016 qtio422016.Writer) {
