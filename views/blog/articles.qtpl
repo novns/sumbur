@@ -1,0 +1,5 @@
+{% func (articles *Articles) Articles() -%}
+{% for articles.Next() %}
+{%= articles.article.Article() %}
+{% endfor -%}
+{% endfunc %}
