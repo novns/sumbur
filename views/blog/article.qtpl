@@ -1,0 +1,52 @@
+{% import (
+    "sumbur/views"
+) %}
+
+
+{% func (article *Article) Article() -%}
+<section id="article-{%d article.article_id %}" class="mt-4">
+
+<div class="row">
+
+<div class="col">
+<h4>{%z article.title %}</h4>
+<div>{%z= article.body_ht %}</div>
+</div>
+
+<div class="col text-end"></div>
+
+</div>
+
+<div class="row mt-2">
+
+<div class="col">
+{% for _, tag := range article.tags -%}
+{% stripspace %}
+
+{% if string(tag) == *article.stag %}
+
+<a href="/" class="me-2">
+<span class="badge bg-primary">{%z tag %}
+</span>
+</span>
+</a>
+
+{% else %}
+
+<a href="/tag/{%z tag %}" class="me-2">
+<span class="badge bg-secondary">{%z tag %}
+</span>
+</a>
+
+{% endif %}
+
+{% endstripspace %}
+{% endfor -%}
+</div>
+
+<div class="col small text-end text-secondary">{%= views.Date(article.created) %}</div>
+
+</div>
+
+</section>
+{% endfunc %}
