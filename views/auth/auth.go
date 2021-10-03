@@ -15,6 +15,8 @@ type Config struct {
 	Cookie   string
 	Password string
 	TTL      time.Duration
+
+	Redis redis.Options
 }
 
 type Auth struct {
@@ -27,7 +29,8 @@ type Auth struct {
 func Init(config *Config) *Auth {
 	return &Auth{
 		config: config,
-		rdb:    redis.NewClient(&redis.Options{}),
+		rdb:    redis.NewClient(&config.Redis),
+		state:  false,
 	}
 }
 
