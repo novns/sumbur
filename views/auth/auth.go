@@ -40,6 +40,8 @@ func (auth *Auth) State() bool {
 
 func (auth *Auth) Check() atreugo.Middleware {
 	return func(ctx *atreugo.RequestCtx) error {
+		auth.state = false
+
 		session_b := ctx.Request.Header.Cookie(auth.config.Cookie)
 		if session_b == nil {
 			return ctx.Next()
