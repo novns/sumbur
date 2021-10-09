@@ -18,5 +18,7 @@ func PanicView(ctx *atreugo.RequestCtx, err interface{}) {
 	ctx.Logger().Printf("%s", err)
 
 	ctx.SetStatusCode(500)
+	ctx.ResetBody()
+
 	views.WritePage(ctx, &Panic{err: err, stack: debug.Stack()})
 }
