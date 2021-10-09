@@ -6,7 +6,7 @@ $(".articles").on("click", ".article-edit", function () {
     } else {
         $.get("/edit/" + id, function (data) {
             $("#article-" + id).html(data);
-            $("#title-" + id).focus()
+            $((id == 0 ? "#url-" : "#title-") + id).focus();
         });
     }
 });
@@ -35,12 +35,16 @@ $(".articles").on("submit", "form.article-form", function () {
     $.post("/edit/" + id,
         $("#article-form-" + id).serialize(),
         function (data) {
-            $("#article-" + id).html(data);
-            $("#title-" + id).focus()
+            if (id == 0) {
+                location.reload();
+            } else {
+                $("#article-" + id).html(data);
+                $("#title-" + id).focus()
 
-            $.get("/tags/" + $("#tags").data("stag"), function (data) {
-                $("#tags").replaceWith(data);
-            });
+                $.get("/tags/" + $("#tags").data("stag"), function (data) {
+                    $("#tags").replaceWith(data);
+                });
+            }
         }
     );
 

@@ -2,7 +2,7 @@
 
 
 {% func (article *Article) Edit() -%}
-{%= article.Article() %}
+{% if article.article_id != 0 %}{%= article.Article() %}{% endif %}
 
 <form id="article-form-{%d article.article_id %}" action="/edit/{%d article.article_id %}" method="post" autocomplete="off" class="article-form bg-light mt-3 ms-4 me-3 p-3">
 

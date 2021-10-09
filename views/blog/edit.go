@@ -20,6 +20,11 @@ func EditGet(ctx *atreugo.RequestCtx) error {
 	article := &Article{stag: &views.EmptyString}
 	article_id := views.IntValue(ctx, "article_id")
 
+	if article_id == 0 {
+		article.WriteEdit(ctx)
+		return nil
+	}
+
 	if article.QueryArticle(db, article_id) {
 		article.WriteEdit(ctx)
 	} else {
@@ -30,6 +35,23 @@ func EditGet(ctx *atreugo.RequestCtx) error {
 }
 
 //
+
+var SQL_INSERT = heredoc.Doc(`
+INSERT INTO "article" (
+	"title",
+	"body",
+	"body_ht",
+	"public"
+)
+VALUES (
+	$1,
+	$2,
+	$3,
+	$4
+)
+ON CONFLICT  DO NOTHING
+RETURNING "article_id"
+`)
 
 var SQL_UPDATE = heredoc.Doc(`
 UPDATE "article"
@@ -60,14 +82,26 @@ func EditPost(ctx *atreugo.RequestCtx) error {
 
 	db.Begin()
 
-	db.Exec(
-		SQL_UPDATE,
-		article_id,
-		args.Peek("title"),
-		body,
-		body_ht,
-		args.Has("public"),
-	)
+	if article_id == 0 {
+		db.Query(
+			SQL_INSERT,
+			args.Peek("title"),
+			body,
+			body_ht,
+			args.Has("public"),
+		).Get(&article_id)
+
+		views.SetIntValue(ctx, "article_id", article_id)
+	} else {
+		db.Exec(
+			SQL_UPDATE,
+			article_id,
+			args.Peek("title"),
+			body,
+			body_ht,
+			args.Has("public"),
+		)
+	}
 
 	// Tags
 

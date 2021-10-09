@@ -17,7 +17,9 @@ var (
 )
 
 func (article *Article) StreamEdit(qw422016 *qt422016.Writer) {
-	article.StreamArticle(qw422016)
+	if article.article_id != 0 {
+		article.StreamArticle(qw422016)
+	}
 	qw422016.N().S(`
 
 <form id="article-form-`)

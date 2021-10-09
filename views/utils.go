@@ -32,3 +32,7 @@ func IntValue(ctx *atreugo.RequestCtx, key string) int {
 
 	return result
 }
+
+func SetIntValue(ctx *atreugo.RequestCtx, key string, value int) {
+	ctx.SetUserValue(key, strconv.Itoa(value))
+}

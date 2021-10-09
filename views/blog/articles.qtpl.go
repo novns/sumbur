@@ -17,6 +17,8 @@ var (
 func (articles *Articles) StreamArticles(qw422016 *qt422016.Writer) {
 	qw422016.N().S(`<div class="articles">
 
+<section id="article-0" class="mt-4"></section>
+
 `)
 	for articles.Next() {
 		qw422016.N().S(`
