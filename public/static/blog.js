@@ -37,6 +37,10 @@ $(".articles").on("submit", "form.article-form", function () {
         function (data) {
             $("#article-" + id).html(data);
             $("#title-" + id).focus()
+
+            $.get("/tags/" + $("#tags").data("stag"), function (data) {
+                $("#tags").replaceWith(data);
+            });
         }
     );
 

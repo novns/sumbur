@@ -1,5 +1,5 @@
 {% func (tags *Tags) Tags() -%}
-<div class=fs-5>
+<div id="tags" data-stag="{%s *tags.stag %}" class="fs-5">
 {% for tags.Next() -%}
 {% stripspace %}
 

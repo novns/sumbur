@@ -15,7 +15,9 @@ var (
 )
 
 func (tags *Tags) StreamTags(qw422016 *qt422016.Writer) {
-	qw422016.N().S(`<div class=fs-5>
+	qw422016.N().S(`<div id="tags" data-stag="`)
+	qw422016.E().S(*tags.stag)
+	qw422016.N().S(`" class="fs-5">
 `)
 	for tags.Next() {
 		if string(tags.tag) == *tags.stag {

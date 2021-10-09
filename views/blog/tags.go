@@ -5,6 +5,7 @@ import (
 	"sumbur/views"
 
 	"github.com/MakeNowJust/heredoc"
+	"github.com/savsgio/atreugo/v11"
 )
 
 var SQL_TAGS = heredoc.Doc(`
@@ -47,4 +48,13 @@ func QueryTags(db *db.DB, stag *string) *Tags {
 
 func (tags *Tags) Next() bool {
 	return tags.query.Next()
+}
+
+func TagsGet(ctx *atreugo.RequestCtx) error {
+	db := db.Open(ctx)
+	defer db.Close()
+
+	QueryTags(db, views.PathValue(ctx, "tag")).WriteTags(ctx)
+
+	return nil
 }
