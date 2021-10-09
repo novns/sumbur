@@ -48,7 +48,11 @@ func (rows *Rows) Next() bool {
 	return true
 }
 
-func (rows *Rows) Get() bool {
+func (rows *Rows) Get(dest ...interface{}) bool {
+	if dest != nil {
+		rows.dest = &dest
+	}
+
 	if !rows.Next() {
 		return false
 	}
