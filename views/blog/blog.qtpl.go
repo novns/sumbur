@@ -59,6 +59,26 @@ func (blog *Blog) TitleAdd() string {
 	return qs422016
 }
 
+func (blog *Blog) StreamTitleRight(qw422016 *qt422016.Writer) {
+	if views.AuthState {
+		qw422016.N().S(`<div class="articles"><button id="article-edit-0" type="button" class="article-edit btn btn-outline-primary btn-sm">Add</button></div>`)
+	}
+}
+
+func (blog *Blog) WriteTitleRight(qq422016 qtio422016.Writer) {
+	qw422016 := qt422016.AcquireWriter(qq422016)
+	blog.StreamTitleRight(qw422016)
+	qt422016.ReleaseWriter(qw422016)
+}
+
+func (blog *Blog) TitleRight() string {
+	qb422016 := qt422016.AcquireByteBuffer()
+	blog.WriteTitleRight(qb422016)
+	qs422016 := string(qb422016.B)
+	qt422016.ReleaseByteBuffer(qb422016)
+	return qs422016
+}
+
 func (blog *Blog) StreamBody(qw422016 *qt422016.Writer) {
 	qw422016.N().S(`
 `)

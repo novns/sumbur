@@ -17,6 +17,19 @@
 {% endstripspace %}
 
 
+{% stripspace %}
+{% func (blog *Blog) TitleRight() %}
+
+{% if views.AuthState %}
+<div class="articles">
+<button id="article-edit-0" type="button" class="article-edit btn btn-outline-primary btn-sm">Add</button>
+</div>
+{% endif %}
+
+{% endfunc %}
+{% endstripspace %}
+
+
 {% func (blog *Blog) Body() %}
 {%= blog.tags.Tags() %}
 

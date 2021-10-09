@@ -1,6 +1,7 @@
 {% interface HTML {
     Title()
     TitleAdd()
+    TitleRight()
     Body()
     Scripts()
 } %}
@@ -13,6 +14,8 @@ type BasePage struct{}
 {% func (page *BasePage) Title() %}{% endfunc %}
 
 {% func (page *BasePage) TitleAdd() %}{% endfunc %}
+
+{% func (page *BasePage) TitleRight() %}{% endfunc %}
 
 {% func (page *BasePage) Body() %}{% endfunc %}
 
@@ -59,7 +62,9 @@ type BasePage struct{}
 
 <main class="container">
 
-<h2>{%= page.Title() %}{%= page.TitleAdd() %}</h2>
+<div class="d-flex justify-content-between">
+<h2>{%= page.Title() %}{%= page.TitleAdd() %}</h2>{%= page.TitleRight() %}
+</div>
 {%= page.Body() -%}
 
 </main>

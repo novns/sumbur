@@ -21,6 +21,9 @@ type HTML interface {
 	TitleAdd() string
 	StreamTitleAdd(qw422016 *qt422016.Writer)
 	WriteTitleAdd(qq422016 qtio422016.Writer)
+	TitleRight() string
+	StreamTitleRight(qw422016 *qt422016.Writer)
+	WriteTitleRight(qq422016 qtio422016.Writer)
 	Body() string
 	StreamBody(qw422016 *qt422016.Writer)
 	WriteBody(qq422016 qtio422016.Writer)
@@ -60,6 +63,23 @@ func (page *BasePage) WriteTitleAdd(qq422016 qtio422016.Writer) {
 func (page *BasePage) TitleAdd() string {
 	qb422016 := qt422016.AcquireByteBuffer()
 	page.WriteTitleAdd(qb422016)
+	qs422016 := string(qb422016.B)
+	qt422016.ReleaseByteBuffer(qb422016)
+	return qs422016
+}
+
+func (page *BasePage) StreamTitleRight(qw422016 *qt422016.Writer) {
+}
+
+func (page *BasePage) WriteTitleRight(qq422016 qtio422016.Writer) {
+	qw422016 := qt422016.AcquireWriter(qq422016)
+	page.StreamTitleRight(qw422016)
+	qt422016.ReleaseWriter(qw422016)
+}
+
+func (page *BasePage) TitleRight() string {
+	qb422016 := qt422016.AcquireByteBuffer()
+	page.WriteTitleRight(qb422016)
 	qs422016 := string(qb422016.B)
 	qt422016.ReleaseByteBuffer(qb422016)
 	return qs422016
@@ -145,10 +165,14 @@ func StreamPage(qw422016 *qt422016.Writer, page HTML) {
 
 <main class="container">
 
+<div class="d-flex justify-content-between">
 <h2>`)
 	page.StreamTitle(qw422016)
 	page.StreamTitleAdd(qw422016)
-	qw422016.N().S(`</h2>
+	qw422016.N().S(`</h2>`)
+	page.StreamTitleRight(qw422016)
+	qw422016.N().S(`
+</div>
 `)
 	page.StreamBody(qw422016)
 	qw422016.N().S(`
