@@ -15,7 +15,13 @@
 </div>
 </div>
 
-<div class="col text-end"></div>
+{% stripspace %}
+<div class="col text-end">
+{% if views.AuthState %}
+<button id="article-edit-{%d article.article_id %}" type="button" class="article-edit btn btn-outline-primary btn-sm">Edit</button>
+{% endif %}
+</div>
+{% endstripspace %}
 
 </div>
 

@@ -39,7 +39,15 @@ func (article *Article) StreamArticle(qw422016 *qt422016.Writer) {
 </div>
 </div>
 
-<div class="col text-end"></div>
+`)
+	qw422016.N().S(`<div class="col text-end">`)
+	if views.AuthState {
+		qw422016.N().S(`<button id="article-edit-`)
+		qw422016.N().D(article.article_id)
+		qw422016.N().S(`" type="button" class="article-edit btn btn-outline-primary btn-sm">Edit</button>`)
+	}
+	qw422016.N().S(`</div>`)
+	qw422016.N().S(`
 
 </div>
 
