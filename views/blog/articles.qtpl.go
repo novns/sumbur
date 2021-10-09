@@ -15,6 +15,9 @@ var (
 )
 
 func (articles *Articles) StreamArticles(qw422016 *qt422016.Writer) {
+	qw422016.N().S(`<div class="articles">
+
+`)
 	for articles.Next() {
 		qw422016.N().S(`
 `)
@@ -22,6 +25,10 @@ func (articles *Articles) StreamArticles(qw422016 *qt422016.Writer) {
 		qw422016.N().S(`
 `)
 	}
+	qw422016.N().S(`
+
+</div>
+`)
 }
 
 func (articles *Articles) WriteArticles(qq422016 qtio422016.Writer) {

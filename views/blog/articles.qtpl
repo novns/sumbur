@@ -1,5 +1,9 @@
 {% func (articles *Articles) Articles() -%}
+<div class="articles">
+
 {% for articles.Next() %}
 {%= articles.article.Article() %}
-{% endfor -%}
+{% endfor %}
+
+</div>
 {% endfunc %}
