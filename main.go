@@ -64,6 +64,8 @@ func main() {
 		panic("A drum, a drum! Panic doth come.")
 	})
 
+	server.Static("/static", "static")
+
 	// Run
 
 	err = server.ListenAndServe()
