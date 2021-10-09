@@ -52,14 +52,14 @@ type Articles struct {
 
 func QueryArticles(db *db.DB, auth views.IAuth, stag *string) *Articles {
 	articles := Articles{
-		query:   db.Query(&SQL_ARTICLES, auth),
+		query:   db.Query(SQL_ARTICLES, auth),
 		article: Article{stag: stag},
 	}
 
 	if stag == &views.EmptyString {
-		articles.query = db.Query(&SQL_ARTICLES, auth.State())
+		articles.query = db.Query(SQL_ARTICLES, auth.State())
 	} else {
-		articles.query = db.Query(&SQL_ARTICLES_TAG, auth.State(), stag)
+		articles.query = db.Query(SQL_ARTICLES_TAG, auth.State(), stag)
 	}
 
 	articles.query.Fields(

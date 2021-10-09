@@ -33,7 +33,7 @@ type Tags struct {
 
 func QueryTags(db *db.DB, auth views.IAuth, stag *string) *Tags {
 	tags := Tags{
-		query: db.Query(&SQL_TAGS, auth.State()),
+		query: db.Query(SQL_TAGS, auth.State()),
 		stag:  stag,
 	}
 

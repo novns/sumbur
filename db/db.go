@@ -55,13 +55,13 @@ func (db *DB) Exec(query string, args ...interface{}) *DB {
 	return db
 }
 
-func (db *DB) Query(query *string, args ...interface{}) *Rows {
+func (db *DB) Query(query string, args ...interface{}) *Rows {
 	db.RowsAffected = 0
 
 	return &Rows{
 		ctx:   db.ctx,
 		conn:  db.conn,
-		query: query,
+		query: &query,
 		args:  &args,
 	}
 }

@@ -34,7 +34,7 @@ func BlogView(auth views.IAuth) atreugo.View {
 
 		stag := views.PathValue(ctx, "tag")
 
-		if (stag != &views.EmptyString) && !db.Query(&SQL_CHECK_TAGS, auth.State(), stag).Get() {
+		if (stag != &views.EmptyString) && !db.Query(SQL_CHECK_TAGS, auth.State(), stag).Get() {
 			return http_errors.NotFoundView(auth)(ctx)
 		}
 
