@@ -64,8 +64,11 @@ func (blog *Blog) StreamBody(qw422016 *qt422016.Writer) {
 `)
 	blog.tags.StreamTags(qw422016)
 	qw422016.N().S(`
+
 `)
 	blog.articles.StreamArticles(qw422016)
+	qw422016.N().S(`
+`)
 }
 
 func (blog *Blog) WriteBody(qq422016 qtio422016.Writer) {
@@ -77,6 +80,26 @@ func (blog *Blog) WriteBody(qq422016 qtio422016.Writer) {
 func (blog *Blog) Body() string {
 	qb422016 := qt422016.AcquireByteBuffer()
 	blog.WriteBody(qb422016)
+	qs422016 := string(qb422016.B)
+	qt422016.ReleaseByteBuffer(qb422016)
+	return qs422016
+}
+
+func (blog *Blog) StreamScripts(qw422016 *qt422016.Writer) {
+	qw422016.N().S(`
+<script defer src="/static/blog.js"></script>
+`)
+}
+
+func (blog *Blog) WriteScripts(qq422016 qtio422016.Writer) {
+	qw422016 := qt422016.AcquireWriter(qq422016)
+	blog.StreamScripts(qw422016)
+	qt422016.ReleaseWriter(qw422016)
+}
+
+func (blog *Blog) Scripts() string {
+	qb422016 := qt422016.AcquireByteBuffer()
+	blog.WriteScripts(qb422016)
 	qs422016 := string(qb422016.B)
 	qt422016.ReleaseByteBuffer(qb422016)
 	return qs422016
