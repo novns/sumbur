@@ -50,16 +50,15 @@ type Articles struct {
 	article Article
 }
 
-func QueryArticles(db *db.DB, auth views.IAuth, stag *string) *Articles {
+func QueryArticles(db *db.DB, stag *string) *Articles {
 	articles := Articles{
-		query:   db.Query(SQL_ARTICLES, auth),
 		article: Article{stag: stag},
 	}
 
 	if stag == &views.EmptyString {
-		articles.query = db.Query(SQL_ARTICLES, auth.State())
+		articles.query = db.Query(SQL_ARTICLES, views.AuthState)
 	} else {
-		articles.query = db.Query(SQL_ARTICLES_TAG, auth.State(), stag)
+		articles.query = db.Query(SQL_ARTICLES_TAG, views.AuthState, stag)
 	}
 
 	articles.query.Fields(

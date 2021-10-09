@@ -79,7 +79,7 @@ func (page *BasePage) Body() string {
 	return qs422016
 }
 
-func StreamPage(qw422016 *qt422016.Writer, page HTML, au IAuth) {
+func StreamPage(qw422016 *qt422016.Writer, page HTML) {
 	qw422016.N().S(`<!DOCTYPE html>
 
 <html lang="en">
@@ -110,7 +110,7 @@ func StreamPage(qw422016 *qt422016.Writer, page HTML, au IAuth) {
 
 <form id="auth-form" action="/auth" method="post" class="d-flex">
 `)
-	if au.State() {
+	if AuthState {
 		qw422016.N().S(`<input type="submit" value="Logout" class="btn btn-danger">
 `)
 	} else {
@@ -146,15 +146,15 @@ func StreamPage(qw422016 *qt422016.Writer, page HTML, au IAuth) {
 `)
 }
 
-func WritePage(qq422016 qtio422016.Writer, page HTML, au IAuth) {
+func WritePage(qq422016 qtio422016.Writer, page HTML) {
 	qw422016 := qt422016.AcquireWriter(qq422016)
-	StreamPage(qw422016, page, au)
+	StreamPage(qw422016, page)
 	qt422016.ReleaseWriter(qw422016)
 }
 
-func Page(page HTML, au IAuth) string {
+func Page(page HTML) string {
 	qb422016 := qt422016.AcquireByteBuffer()
-	WritePage(qb422016, page, au)
+	WritePage(qb422016, page)
 	qs422016 := string(qb422016.B)
 	qt422016.ReleaseByteBuffer(qb422016)
 	return qs422016

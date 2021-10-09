@@ -1,5 +1,3 @@
 package views
 
-type IAuth interface {
-	State() bool
-}
+var AuthState bool = false

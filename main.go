@@ -23,6 +23,10 @@ func main() {
 	config := Config{
 		Server: atreugo.Config{
 			NoDefaultContentType: true,
+
+			MethodNotAllowedView: http_errors.NotFoundView,
+			NotFoundView:         http_errors.NotFoundView,
+			PanicView:            http_errors.PanicView,
 		},
 	}
 
@@ -38,27 +42,23 @@ func main() {
 
 	// Server
 
-	au := auth.Init(&config.Auth)
-
-	config.Server.MethodNotAllowedView = http_errors.NotFoundView(au)
-	config.Server.NotFoundView = http_errors.NotFoundView(au)
-	config.Server.PanicView = http_errors.PanicView(au)
+	auth.Init(&config.Auth)
 
 	db.DSN = &config.DB
 
 	server := atreugo.New(config.Server)
 
-	server.UseBefore(au.Check())
+	server.UseBefore(auth.Check)
 
 	// Routes
 
-	server.GET("/", blog.BlogView(au))
-	server.GET("/tag/{tag}", blog.BlogView(au))
+	server.GET("/", blog.BlogGet)
+	server.GET("/tag/{tag}", blog.BlogGet)
 
-	server.POST("/auth", auth.LoginView(au))
+	server.POST("/auth", auth.AuthPost)
 
-	server.GET("/restrict", auth.RestrictedView(au)).
-		UseBefore(au.Restrict())
+	server.GET("/restrict", auth.RestrictedGet).
+		UseBefore(auth.Restrict)
 
 	server.GET("/panic", func(ctx *atreugo.RequestCtx) error {
 		panic("A drum, a drum! Panic doth come.")

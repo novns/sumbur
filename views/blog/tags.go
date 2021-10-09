@@ -31,9 +31,9 @@ type Tags struct {
 	count int
 }
 
-func QueryTags(db *db.DB, auth views.IAuth, stag *string) *Tags {
+func QueryTags(db *db.DB, stag *string) *Tags {
 	tags := Tags{
-		query: db.Query(SQL_TAGS, auth.State()),
+		query: db.Query(SQL_TAGS, views.AuthState),
 		stag:  stag,
 	}
 

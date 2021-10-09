@@ -16,7 +16,7 @@ type BasePage struct{}
 {% func (page *BasePage) Body() %}{% endfunc %}
 
 
-{% func Page(page HTML, au IAuth) -%}
+{% func Page(page HTML) -%}
 <!DOCTYPE html>
 
 <html lang="en">
@@ -43,7 +43,7 @@ type BasePage struct{}
 <div class="navbar-brand">Sumbur demo</div>
 
 <form id="auth-form" action="/auth" method="post" class="d-flex">
-{% if au.State() -%}
+{% if AuthState -%}
 <input type="submit" value="Logout" class="btn btn-danger">
 {% else -%}
 <input type="password" name="password" size="12" placeholder="Password" class="form-control me-2">
