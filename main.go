@@ -55,6 +55,9 @@ func main() {
 	server.GET("/", blog.BlogGet)
 	server.GET("/tag/{tag}", blog.BlogGet)
 
+	server.GET(`/edit/{article_id:\d+}`, blog.EditGet).
+		UseBefore(auth.Restrict)
+
 	server.POST("/auth", auth.AuthPost)
 
 	server.GET("/restrict", auth.RestrictedGet).

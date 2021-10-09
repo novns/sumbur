@@ -1,0 +1,35 @@
+{% import "bytes" %}
+
+
+{% func (article *Article) Edit() -%}
+{%= article.Article() %}
+
+<form id="article-form-{%d article.article_id %}" action="/edit/{%d article.article_id %}" method="post" autocomplete="off" class="article-form bg-light mt-3 ms-4 me-3 p-3">
+
+<div class="form-floating">
+<input id="title-{%d article.article_id %}" type="text" name="title" class="form-control" value="{%z article.title %}" autofocus>
+<label for="title-{%d article.article_id %}">Title</label>
+</div>
+
+<div class="form-floating mt-3">
+<textarea id="body-{%d article.article_id %}" name="body" class="form-control" style="height: 16em">{%z article.body %}</textarea>
+<label for="body-{%d article.article_id %}">Body</label>
+</div>
+
+<div class="form-floating mt-3">
+<input id="tags-{%d article.article_id %}" type="text" name="tags" class="form-control" value="{%z bytes.Join(article.tags, []byte(", ")) %}">
+<label for="tags-{%d article.article_id %}">Tags</label>
+</div>
+
+<div class="form-check mt-3">
+<input id="public-{%d article.article_id %}" type="checkbox" name="public"{% if article.public %} checked{% endif %}>
+<label for="public-{%d article.article_id %}">Public</label>
+</div>
+
+<div class="mt-3 d-flex justify-content-between">
+<button type="submit" class="btn btn-outline-primary">Save</button>
+<button id="cancel-{%d article.article_id %}" type="button" class="cancel-edit btn btn-outline-danger">Cancel</button>
+</div>
+
+</form>
+{% endfunc %}
