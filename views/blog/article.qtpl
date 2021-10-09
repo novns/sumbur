@@ -46,7 +46,7 @@
 {% endfor -%}
 </div>
 
-<div class="col small text-end text-secondary">{%= views.Date(article.created) %}</div>
+<div class="col small text-end text-secondary pt-1">{%= views.Date(article.created) %}</div>
 
 </div>
 

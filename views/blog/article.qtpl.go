@@ -64,7 +64,7 @@ func (article *Article) StreamArticle(qw422016 *qt422016.Writer) {
 	}
 	qw422016.N().S(`</div>
 
-<div class="col small text-end text-secondary">`)
+<div class="col small text-end text-secondary pt-1">`)
 	views.StreamDate(qw422016, article.created)
 	qw422016.N().S(`</div>
 
