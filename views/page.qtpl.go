@@ -24,6 +24,9 @@ type HTML interface {
 	Body() string
 	StreamBody(qw422016 *qt422016.Writer)
 	WriteBody(qq422016 qtio422016.Writer)
+	Scripts() string
+	StreamScripts(qw422016 *qt422016.Writer)
+	WriteScripts(qq422016 qtio422016.Writer)
 }
 
 type BasePage struct{}
@@ -74,6 +77,23 @@ func (page *BasePage) WriteBody(qq422016 qtio422016.Writer) {
 func (page *BasePage) Body() string {
 	qb422016 := qt422016.AcquireByteBuffer()
 	page.WriteBody(qb422016)
+	qs422016 := string(qb422016.B)
+	qt422016.ReleaseByteBuffer(qb422016)
+	return qs422016
+}
+
+func (page *BasePage) StreamScripts(qw422016 *qt422016.Writer) {
+}
+
+func (page *BasePage) WriteScripts(qq422016 qtio422016.Writer) {
+	qw422016 := qt422016.AcquireWriter(qq422016)
+	page.StreamScripts(qw422016)
+	qt422016.ReleaseWriter(qw422016)
+}
+
+func (page *BasePage) Scripts() string {
+	qb422016 := qt422016.AcquireByteBuffer()
+	page.WriteScripts(qb422016)
 	qs422016 := string(qb422016.B)
 	qt422016.ReleaseByteBuffer(qb422016)
 	return qs422016
@@ -141,7 +161,9 @@ func StreamPage(qw422016 *qt422016.Writer, page HTML) {
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
+`)
+	page.StreamScripts(qw422016)
+	qw422016.N().S(`
 </body>
 
 
