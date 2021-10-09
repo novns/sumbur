@@ -13,6 +13,8 @@ var DSN *string
 type DB struct {
 	ctx  *context.Context
 	conn *pgxpool.Pool
+
+	RowsAffected int64
 }
 
 func Open(ctx context.Context) *DB {
@@ -30,26 +32,32 @@ func (db *DB) Close() {
 
 // Transactions
 
-func (db *DB) Begin() {
-	db.Exec("begin")
+func (db *DB) Begin() *DB {
+	db.conn.Exec(*db.ctx, "begin")
+	return db
 }
 
-func (db *DB) Commit() {
-	db.Exec("commit")
+func (db *DB) Commit() *DB {
+	db.conn.Exec(*db.ctx, "commit")
+	return db
 }
 
 // Queries
 
-func (db *DB) Exec(query string, args ...interface{}) int64 {
+func (db *DB) Exec(query string, args ...interface{}) *DB {
 	ct, err := db.conn.Exec(*db.ctx, query, args...)
 	if err != nil {
 		panic(err)
 	}
 
-	return ct.RowsAffected()
+	db.RowsAffected = ct.RowsAffected()
+
+	return db
 }
 
 func (db *DB) Query(query *string, args ...interface{}) *Rows {
+	db.RowsAffected = 0
+
 	return &Rows{
 		ctx:   db.ctx,
 		conn:  db.conn,
