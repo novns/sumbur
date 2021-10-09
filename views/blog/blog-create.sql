@@ -43,7 +43,7 @@ VALUES
     1,
     'Title 1',
     'Article 1',
-    'Article 1',
+    '<p>Article 1</p>',
     't',
     '2021-09-30 00:01:00'
 ),
@@ -51,7 +51,7 @@ VALUES
     2,
     'Title 2',
     'Article 2',
-    'Article 2',
+    '<p>Article 2</p>',
     't',
     '2021-09-30 00:02:00'
 ),
@@ -59,7 +59,7 @@ VALUES
     3,
     'Title 3',
     'Article 3',
-    'Article 3',
+    '<p>Article 3</p>',
     'f',
     '2021-09-30 00:03:00'
 );
