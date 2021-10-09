@@ -28,10 +28,15 @@ func (article *Article) StreamArticle(qw422016 *qt422016.Writer) {
 <div class="col">
 <h4>`)
 	qw422016.E().Z(article.title)
+	if !article.public {
+		qw422016.N().S(`<span class="ms-3 text-danger">☥</span>`)
+	}
 	qw422016.N().S(`</h4>
-<div>`)
+<div>
+`)
 	qw422016.N().Z(article.body_ht)
-	qw422016.N().S(`</div>
+	qw422016.N().S(`
+</div>
 </div>
 
 <div class="col text-end"></div>
