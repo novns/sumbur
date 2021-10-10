@@ -1,27 +1,15 @@
 package blog
 
 import (
+	_ "embed"
 	"sumbur/db"
 	"sumbur/views"
 
-	"github.com/MakeNowJust/heredoc"
 	"github.com/savsgio/atreugo/v11"
 )
 
-var SQL_TAGS = heredoc.Doc(`
-SELECT
-	"tag",
-	count("article_id")  AS "cnt"
-FROM "tag"
-INNER JOIN "article"  USING ("article_id")
-WHERE
-	$1 OR "article"."public"
-GROUP BY
-	"tag"
-ORDER BY
-	"cnt" DESC,
-	"tag"
-`)
+//go:embed sql/tags.sql
+var SQL_TAGS string
 
 type Tags struct {
 	query *db.Rows

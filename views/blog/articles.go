@@ -1,48 +1,16 @@
 package blog
 
 import (
+	_ "embed"
 	"sumbur/db"
 	"sumbur/views"
-
-	"github.com/MakeNowJust/heredoc"
 )
 
-var SQL_ARTICLES = heredoc.Doc(`
-SELECT
-	"article"."article_id",
-	"article"."title",
-	"article"."body_ht",
-	"article"."public",
-	"article"."created",
-	array_agg("tag"."tag"  ORDER BY "tag"."tag")  AS "tags"
-FROM "article"
-FULL OUTER JOIN "tag"  USING ("article_id")
-WHERE
-	$1 OR "article"."public"
-GROUP BY
-	"article"."article_id"
-ORDER BY
-	"created" DESC
-`)
+//go:embed sql/articles.sql
+var SQL_ARTICLES string
 
-var SQL_ARTICLES_TAG = heredoc.Doc(`
-SELECT
-	"article"."article_id",
-	"article"."title",
-	"article"."body_ht",
-	"article"."public",
-	"article"."created",
-	array_agg("tag"."tag"  ORDER BY "tag"."tag")  AS "tags"
-FROM "article"
-FULL OUTER JOIN "tag"  USING ("article_id")
-INNER JOIN "tag"  AS "tag_filter"  USING ("article_id")
-WHERE
-	($1 OR "article"."public") AND ("tag_filter"."tag" = $2)
-GROUP BY
-	"article"."article_id"
-ORDER BY
-	"created" DESC
-`)
+//go:embed sql/articles-tag.sql
+var SQL_ARTICLES_TAG string
 
 type Articles struct {
 	query *db.Rows

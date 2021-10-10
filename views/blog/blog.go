@@ -1,22 +1,16 @@
 package blog
 
 import (
+	_ "embed"
 	"sumbur/db"
 	"sumbur/views"
 	"sumbur/views/http_errors"
 
-	"github.com/MakeNowJust/heredoc"
 	"github.com/savsgio/atreugo/v11"
 )
 
-var SQL_CHECK_TAGS = heredoc.Doc(`
-SELECT "tag"."tag"
-FROM "tag"
-INNER JOIN "article"  USING ("article_id")
-WHERE
-	($1 OR "article"."public") AND ("tag"."tag" = $2)
-LIMIT 1
-`)
+//go:embed sql/tag.sql
+var SQL_CHECK_TAGS string
 
 type Blog struct {
 	*views.BasePage

@@ -2,10 +2,10 @@ package blog
 
 import (
 	"bytes"
+	_ "embed"
 	"sumbur/db"
 	"sumbur/views"
 
-	"github.com/MakeNowJust/heredoc"
 	"github.com/gomarkdown/markdown"
 	"github.com/savsgio/atreugo/v11"
 	"github.com/valyala/fasthttp"
@@ -36,32 +36,11 @@ func EditGet(ctx *atreugo.RequestCtx) error {
 
 //
 
-var SQL_INSERT = heredoc.Doc(`
-INSERT INTO "article" (
-	"title",
-	"body",
-	"body_ht",
-	"public"
-)
-VALUES (
-	$1,
-	$2,
-	$3,
-	$4
-)
-ON CONFLICT  DO NOTHING
-RETURNING "article_id"
-`)
+//go:embed sql/article-insert.sql
+var SQL_INSERT string
 
-var SQL_UPDATE = heredoc.Doc(`
-UPDATE "article"
-SET
-	"title" = $2,
-	"body" = $3,
-	"body_ht" = $4,
-	"public" = $5
-WHERE "article_id" = $1
-`)
+//go:embed sql/article-update.sql
+var SQL_UPDATE string
 
 func EditPost(ctx *atreugo.RequestCtx) error {
 	db := db.Open(ctx)
