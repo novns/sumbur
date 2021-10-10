@@ -57,13 +57,13 @@ func (article *Article) StreamArticle(qw422016 *qt422016.Writer) {
 `)
 	for _, tag := range article.tags {
 		if string(tag) == *article.stag {
-			qw422016.N().S(`<a href="/" class="me-2"><span class="badge bg-primary">`)
+			qw422016.N().S(`<a href="/" class="me-2"><span class="badge bg-primary mb-1">`)
 			qw422016.E().Z(tag)
 			qw422016.N().S(`</span></span></a>`)
 		} else {
 			qw422016.N().S(`<a href="/tag/`)
 			qw422016.E().Z(tag)
-			qw422016.N().S(`" class="me-2"><span class="badge bg-secondary">`)
+			qw422016.N().S(`" class="me-2"><span class="badge bg-secondary mb-1">`)
 			qw422016.E().Z(tag)
 			qw422016.N().S(`</span></a>`)
 		}

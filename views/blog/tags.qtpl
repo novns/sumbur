@@ -6,7 +6,7 @@
 {% if string(tags.tag) == *tags.stag %}
 
 <a href="/" class="me-2">
-    <span class="badge bg-primary">{%z tags.tag %}
+    <span class="badge bg-primary mb-1">{%z tags.tag %}
         <span class="small ms-2">{%d tags.count %}</span>
     </span>
 </a>
@@ -14,7 +14,7 @@
 {% else %}
 
 <a href="/tag/{%z tags.tag %}" class="me-2">
-    <span class="badge bg-secondary">{%z tags.tag %}
+    <span class="badge bg-secondary mb-1">{%z tags.tag %}
         <span class="small ms-2">{%d tags.count %}</span>
     </span>
 </a>

@@ -34,7 +34,7 @@
 {% if string(tag) == *article.stag %}
 
 <a href="/" class="me-2">
-<span class="badge bg-primary">{%z tag %}
+<span class="badge bg-primary mb-1">{%z tag %}
 </span>
 </span>
 </a>
@@ -42,7 +42,7 @@
 {% else %}
 
 <a href="/tag/{%z tag %}" class="me-2">
-<span class="badge bg-secondary">{%z tag %}
+<span class="badge bg-secondary mb-1">{%z tag %}
 </span>
 </a>
 

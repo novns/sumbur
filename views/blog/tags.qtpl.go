@@ -21,7 +21,7 @@ func (tags *Tags) StreamTags(qw422016 *qt422016.Writer) {
 `)
 	for tags.Next() {
 		if string(tags.tag) == *tags.stag {
-			qw422016.N().S(`<a href="/" class="me-2"><span class="badge bg-primary">`)
+			qw422016.N().S(`<a href="/" class="me-2"><span class="badge bg-primary mb-1">`)
 			qw422016.E().Z(tags.tag)
 			qw422016.N().S(`<span class="small ms-2">`)
 			qw422016.N().D(tags.count)
@@ -29,7 +29,7 @@ func (tags *Tags) StreamTags(qw422016 *qt422016.Writer) {
 		} else {
 			qw422016.N().S(`<a href="/tag/`)
 			qw422016.E().Z(tags.tag)
-			qw422016.N().S(`" class="me-2"><span class="badge bg-secondary">`)
+			qw422016.N().S(`" class="me-2"><span class="badge bg-secondary mb-1">`)
 			qw422016.E().Z(tags.tag)
 			qw422016.N().S(`<span class="small ms-2">`)
 			qw422016.N().D(tags.count)
