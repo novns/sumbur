@@ -3,7 +3,10 @@
 
 package blog
 
-import "bytes"
+import (
+	"bytes"
+	"sumbur/views"
+)
 
 import (
 	qtio422016 "io"
@@ -59,6 +62,17 @@ func (article *Article) StreamEdit(qw422016 *qt422016.Writer) {
 <label for="tags-`)
 	qw422016.N().D(article.article_id)
 	qw422016.N().S(`">Tags</label>
+</div>
+
+<div class="form-floating mt-3">
+<input id="created-`)
+	qw422016.N().D(article.article_id)
+	qw422016.N().S(`" type="datetime-local" name="created" class="form-control" value="`)
+	views.StreamInputDateTime(qw422016, article.created)
+	qw422016.N().S(`">
+<label for="created-`)
+	qw422016.N().D(article.article_id)
+	qw422016.N().S(`">Date & time</label>
 </div>
 
 <div class="form-check mt-3">

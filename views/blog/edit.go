@@ -5,6 +5,7 @@ import (
 	_ "embed"
 	"sumbur/db"
 	"sumbur/views"
+	"time"
 
 	"github.com/gomarkdown/markdown"
 	"github.com/savsgio/atreugo/v11"
@@ -21,6 +22,7 @@ func EditGet(ctx *atreugo.RequestCtx) error {
 	article_id := views.IntValue(ctx, "article_id")
 
 	if article_id == 0 {
+		article.created = time.Now()
 		article.WriteEdit(ctx)
 		return nil
 	}
@@ -59,6 +61,8 @@ func EditPost(ctx *atreugo.RequestCtx) error {
 		body_ht = markdown.ToHTML(body, nil, nil)
 	}
 
+	created, _ := time.Parse("2006-01-02T15:04", string(args.Peek("created")))
+
 	db.Begin()
 
 	if article_id == 0 {
@@ -68,6 +72,7 @@ func EditPost(ctx *atreugo.RequestCtx) error {
 			body,
 			body_ht,
 			args.Has("public"),
+			created,
 		).Get(&article_id)
 
 		views.SetIntValue(ctx, "article_id", article_id)
@@ -79,6 +84,7 @@ func EditPost(ctx *atreugo.RequestCtx) error {
 			body,
 			body_ht,
 			args.Has("public"),
+			created,
 		)
 	}
 

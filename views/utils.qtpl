@@ -14,3 +14,12 @@
 {% endfunc %}
 
 {% endstripspace %}
+
+
+{% stripspace %}
+
+{% func InputDateTime(t time.Time) %}
+{%s t.Format("2006-01-02T15:04") %}
+{% endfunc %}
+
+{% endstripspace %}

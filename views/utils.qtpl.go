@@ -17,6 +17,9 @@ var (
 )
 
 func StreamDate(qw422016 *qt422016.Writer, date time.Time) {
+	if date.Day() < 10 {
+		qw422016.N().S(`0`)
+	}
 	qw422016.N().D(date.Day())
 	qw422016.N().S(`.`)
 	if date.Month() < 10 {
@@ -36,6 +39,24 @@ func WriteDate(qq422016 qtio422016.Writer, date time.Time) {
 func Date(date time.Time) string {
 	qb422016 := qt422016.AcquireByteBuffer()
 	WriteDate(qb422016, date)
+	qs422016 := string(qb422016.B)
+	qt422016.ReleaseByteBuffer(qb422016)
+	return qs422016
+}
+
+func StreamInputDateTime(qw422016 *qt422016.Writer, t time.Time) {
+	qw422016.E().S(t.Format("2006-01-02T15:04"))
+}
+
+func WriteInputDateTime(qq422016 qtio422016.Writer, t time.Time) {
+	qw422016 := qt422016.AcquireWriter(qq422016)
+	StreamInputDateTime(qw422016, t)
+	qt422016.ReleaseWriter(qw422016)
+}
+
+func InputDateTime(t time.Time) string {
+	qb422016 := qt422016.AcquireByteBuffer()
+	WriteInputDateTime(qb422016, t)
 	qs422016 := string(qb422016.B)
 	qt422016.ReleaseByteBuffer(qb422016)
 	return qs422016

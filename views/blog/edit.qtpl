@@ -1,4 +1,7 @@
-{% import "bytes" %}
+{% import (
+    "bytes"
+    "sumbur/views"
+) %}
 
 
 {% func (article *Article) Edit() -%}
@@ -19,6 +22,11 @@
 <div class="form-floating mt-3">
 <input id="tags-{%d article.article_id %}" type="text" name="tags" class="form-control" value="{%z bytes.Join(article.tags, []byte(", ")) %}">
 <label for="tags-{%d article.article_id %}">Tags</label>
+</div>
+
+<div class="form-floating mt-3">
+<input id="created-{%d article.article_id %}" type="datetime-local" name="created" class="form-control" value="{%= views.InputDateTime(article.created) %}">
+<label for="created-{%d article.article_id %}">Date & time</label>
 </div>
 
 <div class="form-check mt-3">
