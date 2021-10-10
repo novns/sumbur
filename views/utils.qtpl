@@ -4,6 +4,7 @@
 {% stripspace %}
 
 {% func Date(date time.Time) %}
+{% if date.Day() < 10 %}0{% endif %}
 {%d date.Day() %}
 .
 {% if date.Month() < 10 %}0{% endif %}
