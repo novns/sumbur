@@ -17,3 +17,11 @@ I have created it for my own website and decided to share the code.
 ## Usage
 
 Clone or fork it and modify to your needs.
+
+
+## TODO
+
+* Remove greasy Bootstrap and jQuery things
+* Some paging would be nice
+* Where are Atom and RSS?
+* Offer the blueprint for blueprinting here and there
